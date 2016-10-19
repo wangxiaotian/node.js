@@ -1,18 +1,32 @@
 var exec = require("child_process").exec;
 
-function start(response){
-	console.log("Request handler 'start' was called.");
-	exec("ls -lah",function(error,stdout,stderr){
-		response.write(200,{"Content-Type" : "text/plain"});
-		response.write(stdout);
-		response.end();
-	})
+function start(response) {
+    console.log("Request handler 'start' was called.");
+
+    /*var body = '<html>' +
+        '<head>' +
+        '<meta http-equiv="Content-Type" content="text/html; ' +
+        'charset=UTF-8" />' +
+        '</head>' +
+        '<body>' +
+        '<form action="/upload" method="post">' +
+        '<textarea name="text" rows="20" cols="60"></textarea>' +
+        '<input type="submit" value="Submit text" />' +
+        '</form>' +
+        '</body>' +
+        '</html>';*/
+
+    console.log('这个有吗');
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.write('body');
+    response.end();
 }
-function upload(response){
-	console.log("Request handler 'upload' was called.");
-	response.write(200,{"Content-Type" : "text/plain"});
-	response.write("Hello Upload");
-	response.end();
+
+function upload(response) {
+    console.log("Request handler 'upload' was called.");
+    response.write(200, { "Content-Type": "text/plain" });
+    response.write("Hello Upload");
+    response.end();
 }
 
 exports.start = start;

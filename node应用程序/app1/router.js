@@ -1,6 +1,7 @@
 function route(handle,pathname,response){
-	console.log("About to route a request for" + pathname);
+	/*console.log("About to route a request for" + pathname);*/
 	if(typeof handle[pathname] === 'function'){
+		console.log('进来了');
 		handle[pathname](response);
 	} else {
 		console.log("No request handler found for" + pathname);
