@@ -44,11 +44,16 @@ function upload(res,req){
 	console.log('Request handler "upload" was called.');
 
 	var form = new formidable.IncomingForm();
-	console.log('parsing done');
-	form.parse(request,function(error,fields,files){
+	console.log('about to parse');
+
+	//	设定文件上传路径
+	form.upLoadDir = '/tmp';
+	form.parse(req,function(error,fields,files){
+		console.log(req);
 		console.log('parsing done');
-		fs.renameSync(files.upload.path,"./bac.png");
-		res.writeHead(200,{'Content-Type':'text/html'});
+		console.log(files.upload);
+		fs.renameSync(files.upload.path,"tmp/test.png");
+		res.writeHead(200,{'Content-Type':'./text/html'});
 		res.write('received image:<br/>');
 		res.write('<img src = "/show" />');
 		res.end();
