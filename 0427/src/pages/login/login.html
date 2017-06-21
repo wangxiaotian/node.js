@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="js/utils.js"></script>
+</head>
+
+<body>
+    <header>
+        王小天的博客
+    </header>
+    <div class="login">
+        <p>
+            <label for="">用户名：</label>
+            <input type="text" name="username" placeholder="输入用户名">
+        </p>
+        <p>
+            <label for="">密码：</label>
+            <input type="text" name="userpwd" placeholder="输入密码">
+        </p>
+        <p>
+            <label for="">年龄：</label>
+            <input type="text" name="userage" placeholder="输入密码">
+        </p>
+        <p>
+            <label for="">工作：</label>
+            <input type="text" name="job" placeholder="输入密码">
+        </p>
+        <p>
+            <button>登录</button>
+        </p>
+        <p><a href="javascript:;" id="add">注册</a></p>
+    </div>
+    <script>
+    window.onload = function() {
+            var btn = document.querySelector('button'),
+                oInpUser = document.querySelector('input[name = "username"]'),
+                oRegister = document.querySelector('#add'),
+                oInpAge = document.querySelector('input[name = "userage"]')
+                oInpJob = document.querySelector('input[name = "job"]')
+                oInpPwd = document.querySelector('input[name = "userpwd"]');
+            btn.onclick = function() {
+                console.log('登录');
+                var name = oInpUser.value,
+                    pwd = oInpPwd.value;
+                var data = {
+                    username: name,
+                    userpwd: pwd
+                }
+                /*data = 'username=' + data.username + '&&userpwd=' + data.userpwd;*/
+                utils.ajax({
+                    url: 'login',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    headers: {
+                        "content-Type": 'application/json;charset=UTF-8'
+                    },
+                    success: function(res) {
+                    	if(res.msg){
+                    		alert(res.msg)
+                    	}
+                        console.log(res);
+                        typeof res;
+                        /*alert(res[0].userpwd)*/
+                    },
+                    error: function(res) {
+                        alert('请求失败')
+                    }
+                })
+            }
+            oRegister.onclick = function(){
+                var name = oInpUser.value,
+                    pwd = oInpPwd.value,
+                    age = oInpAge.value,
+                    job = oInpJob.value;
+                var data = {
+                    username: name,
+                    userpwd: pwd,
+                    userage: age,
+                    job: job
+                }
+                utils.ajax({
+                    url: 'add',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    headers: {
+                        "content-Type": 'application/json;charset=UTF-8'
+                    },
+                    success: function(res) {
+                        alert(res);
+                        /*alert(res[0].userpwd)*/
+                    },
+                    error: function(res) {
+                        alert('请求失败')
+                    }
+                })
+            }
+        }
+        /*utils.ready(function(){
+        	var btn = document.querySelector('button'),
+        		oInpUser = document.querySelector('input[name = user]'),
+        		oInpPwd = document.querySelector('input[name = pwd]');
+        	btn.onclick = function(){
+        		console.log('登录');
+        		var name = oInpUser.value,
+        			pwd = oInpPwd.value;
+        		var data = {
+        			username: name,
+        			pwd: userpwd
+        		}
+        		utils.ajax({
+        			url: 'login',
+        			type: 'POST',
+        			data: data,
+        			dataType: 'json',
+        			success: function(res){
+        				alert('登录成功')
+        			},
+        			error: function(res){
+        				alert('请求失败')
+        			}
+        		})
+        	}
+        })*/
+    </script>
+</body>
+
+</html>
